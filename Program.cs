@@ -13,15 +13,18 @@ class Program
 
         while (ruleaza)
         {
-            Console.WriteLine("\nEnter comma-separated numbers: ");
+            Console.WriteLine("\nEnter 5 or more comma-separated numbers: ");
             string userInput = Console.ReadLine();
-            if (userInput == "")
-                ruleaza = false;
-            else 
+            char delimiter = ',';
+            string[] numberStrings = userInput.Split(delimiter);
+            
+            if (userInput == "" || numberStrings.Length < 5 )
             {
-                char delimiter = ',';
-
-                string[] numberStrings = userInput.Split(delimiter);
+                Console.WriteLine("Invalid List. Retry.");
+            }
+            
+            else if (numberStrings.Length > 5 )
+            {
                 foreach (string number in numberStrings)
                 {
                     int.TryParse(number, out int myNumber);
@@ -35,7 +38,11 @@ class Program
                 else
                 {
                     numbers.Sort();
-                    Console.WriteLine(numbers);
+                    Console.WriteLine("The 3 smallest numbers in the list are: ");
+                    for (int i=0; i<3; i++)
+                    {
+                        Console.WriteLine(numbers[i]);
+                    }
                     // Console.WriteLine(numbers.GetRange(0,3));
                     ruleaza = false;
                 }
